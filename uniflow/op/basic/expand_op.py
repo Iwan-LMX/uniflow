@@ -1,19 +1,20 @@
 import copy
-from typing import Sequence, Any
+from typing import Sequence
 
 from uniflow.node import Node
 from uniflow.op.op import Op
 
-class ExpandOp():
+class ExpandOp(Op):
     def __call__(self, node: Node) -> Sequence[Node]:
-        """Expand Operation.
+        """Expand Operation. if root has value_dict has elements large than 1
 
         Args:
-            nodes (Sequence[Node]): Input a root node.
+            nodes (Node): Input a root node.
 
         Returns:
             Sequence[Node]: Output two nodes.
         """
+        if not node.value_dict or len(node.value_dict) ==1: return [node]
         output_nodes = []
         root_keys = list(node.value_dict.keys())
         root_half = len(root_keys) // 2
