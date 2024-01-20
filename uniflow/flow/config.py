@@ -18,6 +18,21 @@ from uniflow.op.model.model_config import (
     OpenAIModelConfig,
     SageMakerModelConfig,
 )
+###########################################################
+#                   All Flow_Dict Configs                   #
+###########################################################
+@dataclass
+class FlowDictConfig:
+    #copy from transform config
+    """Transform Linear Config Class."""
+
+    flow_name: str = "expand_reduce_flow"
+    prompt_template: PromptTemplate = field(
+        default_factory=lambda: PromptTemplate(instruction="", few_shot_prompt=[])
+    )
+    model_config: ModelConfig = field(default_factory=lambda: {})
+
+
 
 ###########################################################
 #                   All Extract Configs                   #
